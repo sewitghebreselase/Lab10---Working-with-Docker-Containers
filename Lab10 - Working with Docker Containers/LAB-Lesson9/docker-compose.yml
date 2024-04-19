@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  spring-app:
+    image: spring-mysql-docker-app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql-db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/ads?autoReconnect=true&allowPublicKeyRetrieval=true&useSSl=false
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: root
+
+  mysql-db:
+    image: mysql:latest
+    environment:
+      DATABASE_HOST: docker-mysql
+      DATABASE_PORT: 3306
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ads
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: root
